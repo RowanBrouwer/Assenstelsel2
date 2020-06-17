@@ -1,0 +1,16 @@
+﻿<Window x:Class="Assenstelsel2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assenstelsel2"
+        mc:Ignorable="d"
+        x:Name="window" Title="MainWindow" Height="450" Width="800" MouseLeftButtonDown="Click" ResizeMode="NoResize">
+    <Grid>
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792">
+            <Label x:Name="schermcordinaten" Content="" Canvas.Left="37" Canvas.Top="312" Width="250" Height="25"/>
+            <Label x:Name="schermCverschil" Content="" Canvas.Left="37" Canvas.Top="342" Width="200" Height="25"/>
+        </Canvas>
+        <CheckBox x:Name="Adder" Content="CheckBox" HorizontalAlignment="Left" Margin="713,10,0,0" VerticalAlignment="Top" Checked="Adder_Checked" />
+    </Grid>
+</Window>
