@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -27,21 +28,27 @@ namespace Assenstelsel2
         bool dba = false;
         Point mid;
         Point DataP;
-        int[] pcoll = { 255, 255, 255 };
         double psize = 4;
+        double xdiff = 0;
+        double ydiff = 0;
+        Color C;
+        byte Red;
+        byte Green;
+        byte Blue;
+        double xdiffR;
+        double ydiffR;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
+
         private void Click(object sender, MouseButtonEventArgs e)
         {
             if (dba == false)
             {
-                mid = Mouse.GetPosition(window);
-                double mv = mid.X;
-                double mh = mid.Y;
+                mid = Mouse.GetPosition(window);                
                 dba = true;
 
                 Rectangle V1 = new Rectangle();
@@ -63,13 +70,15 @@ namespace Assenstelsel2
             else if (dba == true)
             {
                 DataP = Mouse.GetPosition(window);
-                double xdiff = 0;
-                double ydiff = 0;
-                schermcordinaten.Content = ($"Schermcoordinaten : X = {DataP.X}, Y = {DataP.Y}");
+                double dataxR = Math.Round((double)DataP.X, 2);
+                double datayR = Math.Round((double)DataP.Y, 2);
+                schermcordinaten.Content = ($"Schermcoordinaten : X = {dataxR}, Y = {datayR}");
                 xdiff = DataP.X - mid.X;
                 ydiff = mid.Y - DataP.Y;
-                schermCverschil.Content = ($"Verschil : X = {xdiff}, Y = {ydiff}");
-
+                xdiffR = Math.Round((double)xdiff, 2);
+                ydiffR = Math.Round((double)ydiff, 2);
+                schermCverschil.Content = ($"Verschil : X = {xdiffR}, Y = {ydiffR}");
+                DotPlacer();
             }
         }
 
@@ -84,15 +93,30 @@ namespace Assenstelsel2
                 TV.Fill = new SolidColorBrush(Colors.DarkRed);
                 TV.Margin = new Thickness(mid.X + i + 2, 0, 0, 0);
                 canvas.Children.Add(TV);
-            }
-            for (int i = -900; i < 900; i = i + 100)
-            {
+
                 Rectangle TH = new Rectangle();
                 TH.Width = canvas.ActualWidth;
                 TH.Height = 2;
                 TH.Fill = new SolidColorBrush(Colors.DarkRed);
                 TH.Margin = new Thickness(0, mid.Y + i + 2, 0, 0);
                 canvas.Children.Add(TH);
+
+                Label HN = new Label();
+                HN.Width = 40;
+                HN.Height = 40;
+                HN.FontSize = 20;
+                HN.Content = mid.X - mid.X + i * 100;
+                HN.Margin = new Thickness(mid.X + i +10, mid.Y , 0, 0);
+                canvas.Children.Add(HN);
+
+                Label VN = new Label();
+                VN.Width = 40;
+                VN.Height = 40;
+                VN.FontSize = 20;
+                VN.Content = mid.X - mid.X + i * 100;
+                VN.Margin = new Thickness(mid.X , mid.X - mid.X - i + 200, 0, 0);
+                canvas.Children.Add(VN);
+
             }
             for (int i = -1900; i < 1900; i = i + 10)
             {
@@ -102,21 +126,25 @@ namespace Assenstelsel2
                 THi.Fill = new SolidColorBrush(Colors.DarkRed);
                 THi.Margin = new Thickness(0, mid.Y + i + 2, 0, 0);
                 canvas.Children.Add(THi);
-            }
-            for (int i = -1900; i < 1900; i = i + 10)
-            {
+
                 Rectangle TVi = new Rectangle();
                 TVi.Width = 0.5;
                 TVi.Height = canvas.ActualHeight;
                 TVi.Fill = new SolidColorBrush(Colors.DarkRed);
                 TVi.Margin = new Thickness(mid.X + i + 2, 0, 0, 0);
                 canvas.Children.Add(TVi);
+
             }
         }
 
         private void DotPlacer()
         {
             Ellipse DT = new Ellipse();
+            DT.Width = psize;
+            DT.Height = psize;
+            DT.Fill = new SolidColorBrush(Color.FromRgb(Red, Green, Blue));
+            DT.Margin = new Thickness(DataP.X, DataP.Y, 0, 0);
+            canvas.Children.Add(DT);
         }
 
         private void Adder_Checked(object sender, RoutedEventArgs e)
@@ -125,6 +153,44 @@ namespace Assenstelsel2
             {
                 gridadder();
                 Adder.IsEnabled = false;
+            }
+            else
+            {
+                Adder.IsChecked = false;
+            }
+        }
+
+        private void Reset_Click(object sender, RoutedEventArgs e)
+        {
+            reset();
+        }
+
+        private void reset()
+        {
+            canvas.Children.Clear();
+            dba = false;
+            Adder.IsEnabled = true;
+            Adder.IsChecked = false;
+            mid.X = 0; mid.Y = 0;
+            DataP.X = 0; DataP.Y = 0;
+            schermcordinaten.Content = "";
+            schermCverschil.Content = "";
+
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            psize = slid.Value;
+        }
+
+        private void cp_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            if (cp.SelectedColor.HasValue)
+            {
+                C = cp.SelectedColor.Value;
+                Red = C.R;
+                Green = C.G;
+                Blue = C.B;
             }
         }
     }
