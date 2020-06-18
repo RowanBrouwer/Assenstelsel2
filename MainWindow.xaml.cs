@@ -105,17 +105,31 @@ namespace Assenstelsel2
                 HN.Width = 40;
                 HN.Height = 40;
                 HN.FontSize = 20;
-                HN.Content = mid.X - mid.X + i * 100;
-                HN.Margin = new Thickness(mid.X + i +10, mid.Y , 0, 0);
+                HN.Content = (mid.X - mid.X) + i;
+                HN.Margin = new Thickness(mid.X + i, mid.Y , 0, 0);
                 canvas.Children.Add(HN);
 
                 Label VN = new Label();
                 VN.Width = 40;
                 VN.Height = 40;
                 VN.FontSize = 20;
-                VN.Content = mid.X - mid.X + i * 100;
-                VN.Margin = new Thickness(mid.X , mid.X - mid.X - i + 200, 0, 0);
+                VN.Content = (mid.X - mid.X) - i;
+                VN.Margin = new Thickness(mid.X, mid.Y + i , 0, 0);
                 canvas.Children.Add(VN);
+
+                Ellipse GD1 = new Ellipse();
+                GD1.Width = 10;
+                GD1.Height = 10;
+                GD1.Fill = new SolidColorBrush(Colors.Black);
+                GD1.Margin = new Thickness(mid.X - 2.5, mid.Y + i - 2.5, 0, 0);
+                canvas.Children.Add(GD1);
+
+                Ellipse GD2 = new Ellipse();
+                GD2.Width = 10;
+                GD2.Height = 10;
+                GD2.Fill = new SolidColorBrush(Colors.Black);
+                GD2.Margin = new Thickness(mid.X + i - 2.5, mid.Y - 2.5, 0, 0);
+                canvas.Children.Add(GD2);
 
             }
             for (int i = -1900; i < 1900; i = i + 10)
@@ -143,7 +157,7 @@ namespace Assenstelsel2
             DT.Width = psize;
             DT.Height = psize;
             DT.Fill = new SolidColorBrush(Color.FromRgb(Red, Green, Blue));
-            DT.Margin = new Thickness(DataP.X, DataP.Y, 0, 0);
+            DT.Margin = new Thickness(DataP.X - psize/2, DataP.Y - psize/2, 0, 0);
             canvas.Children.Add(DT);
         }
 
