@@ -31,9 +31,9 @@ namespace Assenstelsel2
         double xdiff = 0;
         double ydiff = 0;
         Color C;
-        byte Red = 255;
-        byte Green = 255;
-        byte Blue = 255;
+        byte Red = 0;
+        byte Green = 0;
+        byte Blue = 0;
         double xdiffR;
         double ydiffR;
 
@@ -80,7 +80,7 @@ namespace Assenstelsel2
                 ydiff = mid.Y - DataP.Y;
                 xdiffR = Math.Round((double)xdiff, 2);
                 ydiffR = Math.Round((double)ydiff, 2);
-                schermCverschil.Content = ($"Verschil : X = {xdiffR}, Y = {ydiffR}");
+                schermCverschil.Content = ($"Wetenschappelijk : X = {xdiffR}, Y = {ydiffR}");
                 DotPlacer();
             }
         }
@@ -210,6 +210,9 @@ namespace Assenstelsel2
             DataP.X = 0; DataP.Y = 0;
             schermcordinaten.Content = "";
             schermCverschil.Content = "";
+            Red = 0;
+            Green = 0;
+            Blue = 0;
         }
 
         // Slider for the dot size // 
