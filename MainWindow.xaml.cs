@@ -20,11 +20,10 @@ using System.Windows.Shapes;
 
 namespace Assenstelsel2
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+
+        // values used throughout the code //
         bool dba = false;
         Point mid;
         Point DataP;
@@ -43,13 +42,18 @@ namespace Assenstelsel2
             InitializeComponent();
         }
 
-
+        // When there is an click within the program it looks if dba is true or false, if false it will mark the new center point and saves the cordinates of it as mid. //
+        // When dba is true it will place the Dots and log the cordinate of the last placed dot as DataP and round them to 2 decimals. //
+        // The calculation for the difference between mid and DataP is for x cordinates = DataP.X - mid.X and for Y cordinates mid.Y - DataP.Y, these values are saved as xdiff and ydiff //;
         private void Click(object sender, MouseButtonEventArgs e)
         {
             if (dba == false)
             {
                 mid = Mouse.GetPosition(window);                
                 dba = true;
+
+                // these are the rectangle lines that serve as the new middlepoint // 
+                // they simply take the mid cordinates as middlepoint //
 
                 Rectangle V1 = new Rectangle();
                 V1.Width = 5;
@@ -64,7 +68,6 @@ namespace Assenstelsel2
                 H1.Fill = new SolidColorBrush(Colors.DarkRed);
                 H1.Margin = new Thickness(0, mid.Y, 0, 0);
                 canvas.Children.Add(H1);
-
             }
 
             else if (dba == true)
@@ -82,11 +85,15 @@ namespace Assenstelsel2
             }
         }
 
-
         private void gridadder()
         {
+            // here the grid will be added, this is done when the checkbox is checked // 
+            // it takes the mid cordinates as center and starts stepping from - to + with steps of 100//
+
             for (int i = -2400; i < 2400; i = i + 100)
             {
+                // These rectangles are the Thick numbered lines of the grid //
+                // the margin has +2 added to it to center it // 
                 Rectangle TV = new Rectangle();
                 TV.Width = 2;
                 TV.Height = canvas.ActualHeight;
@@ -100,6 +107,8 @@ namespace Assenstelsel2
                 TH.Fill = new SolidColorBrush(Colors.DarkRed);
                 TH.Margin = new Thickness(0, mid.Y + i + 2, 0, 0);
                 canvas.Children.Add(TH);
+
+                // these are the labels for the numbers generated the same as the thick lines above //
 
                 Label HN = new Label();
                 HN.Width = 70;
@@ -116,6 +125,9 @@ namespace Assenstelsel2
                 VN.Content = -i;
                 VN.Margin = new Thickness(mid.X, mid.Y + i , 0, 0);
                 canvas.Children.Add(VN);
+
+                // here are the dots that mark where the actual location of the numbers above are // 
+                // their margin is adjusted for the size so they line up perfectly // 
 
                 Ellipse GD1 = new Ellipse();
                 GD1.Width = 10;
@@ -134,6 +146,10 @@ namespace Assenstelsel2
             }
             for (int i = -1900; i < 1900; i = i + 10)
             {
+                // These rectangles are the Thin lines of the grid //
+                // the margin has +2 added to it to center it //
+                // this is done the same way as the ones above except that it starts at -1900 and ends at 1900, the steps are only 10 pixels now //
+
                 Rectangle THi = new Rectangle();
                 THi.Width = canvas.ActualWidth;
                 THi.Height = 0.5;
@@ -147,9 +163,13 @@ namespace Assenstelsel2
                 TVi.Fill = new SolidColorBrush(Colors.DarkRed);
                 TVi.Margin = new Thickness(mid.X + i + 2, 0, 0, 0);
                 canvas.Children.Add(TVi);
-
             }
         }
+
+        // Places the dots for the clicks after the new center is decides //
+        // The size is controlled by the slider further down // 
+        // To center the dots the cordinates are taken and the size is devided by 2 and subtracted of the cordinates //
+        // The Color of the dots is decided by the colorpicker further down //
 
         private void DotPlacer()
         {
@@ -160,6 +180,9 @@ namespace Assenstelsel2
             DT.Margin = new Thickness(DataP.X - psize/2, DataP.Y - psize/2, 0, 0);
             canvas.Children.Add(DT);
         }
+
+        // Simple checkbox that locks itself when activated, this controls the gridadder //
+        // It can only be activated when the center is decided for now // 
 
         private void Adder_Checked(object sender, RoutedEventArgs e)
         {
@@ -175,6 +198,8 @@ namespace Assenstelsel2
             reset();
         }
 
+        // Made an Reset that can be used more often if needed //
+
         private void reset()
         {
             canvas.Children.Clear();
@@ -187,10 +212,15 @@ namespace Assenstelsel2
             schermCverschil.Content = "";
         }
 
+        // Slider for the dot size // 
+
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             psize = slid.Value;
         }
+
+        // Colorpicker sets the values of red green and blue //
+        // This Colorpicker is included in the extended WPF toolkit //
 
         private void cp_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
