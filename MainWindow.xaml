@@ -9,15 +9,22 @@
         x:Name="window" Title="MainWindow" Height="700" Width="1200" MouseLeftButtonDown="Click" ResizeMode="NoResize">
     <Grid>
         <Canvas x:Name="canvas" Background="Bisque" HorizontalAlignment="Left" Height="671" VerticalAlignment="Top" Width="1194" Grid.RowSpan="2"/>
-        <Canvas HorizontalAlignment="Left" Background="LightGray" Height="66" Margin="792,0,0,0" VerticalAlignment="Top" Width="402"/>
+        <Canvas HorizontalAlignment="Left" Background="LightGray" Height="104" Margin="792,0,0,0" VerticalAlignment="Top" Width="402">
+            <Label Content="Dot Edge color :" Canvas.Left="51" Canvas.Top="59" Width="95" Height="25" RenderTransformOrigin="0.839,0.44"/>
+            <Label Content="Dot core color :" Canvas.Left="260" Canvas.Top="59" Width="93" Height="25" RenderTransformOrigin="0.333,-0.22"/>
+        </Canvas>
         <Canvas HorizontalAlignment="Left" Background="LightGray" Height="66" Margin="0,605,0,0" VerticalAlignment="Top" Width="278"/>
         <CheckBox x:Name="Adder" Content="Activate Grid   ||" HorizontalAlignment="Left" Margin="804,13,0,0" VerticalAlignment="Top" Checked="Adder_Checked" Height="16" Width="109" RenderTransformOrigin="0.356,5.006"/>
         <Label x:Name="schermcordinaten" Content="" HorizontalAlignment="Left" Margin="10,631,0,0" VerticalAlignment="Top" Width="250" Height="26"/>
         <Label x:Name="schermCverschil" Content="" HorizontalAlignment="Left" Margin="10,605,0,0" VerticalAlignment="Top" Width="250" Height="26"/>
         <Button x:Name="Reset" Content="Reset" HorizontalAlignment="Left" Margin="1085,631,0,0" VerticalAlignment="Top" Width="75" Click="Reset_Click" Height="20"/>
         <Slider x:Name="slid" HorizontalAlignment="Left" Margin="984,9,0,0" VerticalAlignment="Top" Width="200" Height="20" ValueChanged="Slider_ValueChanged" Minimum="5" Maximum="50" />
+        <Slider x:Name="slid2" HorizontalAlignment="Left" Margin="984,34,0,0" VerticalAlignment="Top" Width="200" Height="20" ValueChanged="slid2_ValueChanged" Minimum="0.1" Maximum="5" />
         <Label x:Name="grote" Content="Stip sizer :" HorizontalAlignment="Left" Margin="913,7,0,0" VerticalAlignment="Top" Width="66" Height="25" />
-        <xctk:ColorPicker x:Name="cp" Margin="1138,30,16,613" DisplayColorAndName="True" SelectedColorChanged="cp_SelectedColorChanged" AvailableColorsSortingMode="HueSaturationBrightness" RenderTransformOrigin="0.5,0.5">
+        <Label x:Name="dikte" Content="Stip rand dikte :" HorizontalAlignment="Left" Margin="886,29,0,0" VerticalAlignment="Top" Width="93" Height="25" />
+        <xctk:ColorPicker x:Name="cp" Margin="1144,59,0,584" DisplayColorAndName="True" SelectedColorChanged="cp_SelectedColorChanged" AvailableColorsSortingMode="HueSaturationBrightness" RenderTransformOrigin="0.5,0.5" Height="30">
+        </xctk:ColorPicker>
+        <xctk:ColorPicker x:Name="ecp" Margin="939,59,200,584" DisplayColorAndName="True" SelectedColorChanged="ecp_SelectedColorChanged" AvailableColorsSortingMode="HueSaturationBrightness" RenderTransformOrigin="0.825,0" Height="30">
         </xctk:ColorPicker>
     </Grid>
 </Window>

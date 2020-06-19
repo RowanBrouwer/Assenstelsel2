@@ -28,12 +28,17 @@ namespace Assenstelsel2
         Point mid;
         Point DataP;
         double psize = 4;
+        double pthickness = 2;
         double xdiff = 0;
         double ydiff = 0;
-        Color C;
-        byte Red = 0;
-        byte Green = 0;
-        byte Blue = 0;
+        Color C1;
+        Color C2;
+        byte dRed = 0;
+        byte dGreen = 0;
+        byte dBlue = 0;
+        byte eRed = 0;
+        byte eGreen = 0;
+        byte eBlue = 0;
         double xdiffR;
         double ydiffR;
 
@@ -176,8 +181,10 @@ namespace Assenstelsel2
             Ellipse DT = new Ellipse();
             DT.Width = psize;
             DT.Height = psize;
-            DT.Fill = new SolidColorBrush(Color.FromRgb(Red, Green, Blue));
+            DT.Stroke = new SolidColorBrush(Color.FromRgb(eRed, eGreen, eBlue));
+            DT.Fill = new SolidColorBrush(Color.FromRgb(dRed, dGreen, dBlue));
             DT.Margin = new Thickness(DataP.X - psize/2, DataP.Y - psize/2, 0, 0);
+            DT.StrokeThickness = pthickness;
             canvas.Children.Add(DT);
         }
 
@@ -210,9 +217,9 @@ namespace Assenstelsel2
             DataP.X = 0; DataP.Y = 0;
             schermcordinaten.Content = "";
             schermCverschil.Content = "";
-            Red = 0;
-            Green = 0;
-            Blue = 0;
+            eRed = 0; dRed = 0;
+            eGreen = 0;dGreen = 0;
+            eBlue = 0;dBlue = 0;
         }
 
         // Slider for the dot size // 
@@ -222,6 +229,13 @@ namespace Assenstelsel2
             psize = slid.Value;
         }
 
+        // Slider for the dot edge thickness
+
+        private void slid2_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            pthickness = slid2.Value;
+        }
+
         // Colorpicker sets the values of red green and blue //
         // This Colorpicker is included in the extended WPF toolkit //
 
@@ -229,10 +243,20 @@ namespace Assenstelsel2
         {
             if (cp.SelectedColor.HasValue)
             {
-                C = cp.SelectedColor.Value;
-                Red = C.R;
-                Green = C.G;
-                Blue = C.B;
+                C1 = cp.SelectedColor.Value;
+                dRed = C1.R;
+                dGreen = C1.G;
+                dBlue = C1.B;
+            }
+        }
+        private void ecp_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            if (ecp.SelectedColor.HasValue)
+            {
+                C2 = ecp.SelectedColor.Value;
+                eRed = C2.R;
+                eGreen = C2.G;
+                eBlue = C2.B;
             }
         }
     }
