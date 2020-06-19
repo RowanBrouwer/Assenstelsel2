@@ -168,10 +168,6 @@ namespace Assenstelsel2
                 gridadder();
                 Adder.IsEnabled = false;
             }
-            else
-            {
-                Adder.IsChecked = false;
-            }
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)
