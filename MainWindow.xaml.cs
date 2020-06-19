@@ -185,7 +185,6 @@ namespace Assenstelsel2
             DataP.X = 0; DataP.Y = 0;
             schermcordinaten.Content = "";
             schermCverschil.Content = "";
-
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
