@@ -166,7 +166,7 @@ namespace Assenstelsel2
             }
         }
 
-        // Places the dots for the clicks after the new center is decides //
+        // Places the dots for the clicks after the new center is decided //
         // The size is controlled by the slider further down // 
         // To center the dots the cordinates are taken and the size is devided by 2 and subtracted of the cordinates //
         // The Color of the dots is decided by the colorpicker further down //
