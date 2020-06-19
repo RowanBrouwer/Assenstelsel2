@@ -32,9 +32,9 @@ namespace Assenstelsel2
         double xdiff = 0;
         double ydiff = 0;
         Color C;
-        byte Red;
-        byte Green;
-        byte Blue;
+        byte Red = 255;
+        byte Green = 255;
+        byte Blue = 255;
         double xdiffR;
         double ydiffR;
 
@@ -85,7 +85,7 @@ namespace Assenstelsel2
 
         private void gridadder()
         {
-            for (int i = -900; i < 900; i = i + 100)
+            for (int i = -2400; i < 2400; i = i + 100)
             {
                 Rectangle TV = new Rectangle();
                 TV.Width = 2;
@@ -102,18 +102,18 @@ namespace Assenstelsel2
                 canvas.Children.Add(TH);
 
                 Label HN = new Label();
-                HN.Width = 40;
+                HN.Width = 70;
                 HN.Height = 40;
                 HN.FontSize = 20;
-                HN.Content = (mid.X - mid.X) + i;
+                HN.Content = i;
                 HN.Margin = new Thickness(mid.X + i, mid.Y , 0, 0);
                 canvas.Children.Add(HN);
 
                 Label VN = new Label();
-                VN.Width = 40;
+                VN.Width = 70;
                 VN.Height = 40;
                 VN.FontSize = 20;
-                VN.Content = (mid.X - mid.X) - i;
+                VN.Content = -i;
                 VN.Margin = new Thickness(mid.X, mid.Y + i , 0, 0);
                 canvas.Children.Add(VN);
 
